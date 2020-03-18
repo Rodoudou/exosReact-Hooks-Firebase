@@ -9,9 +9,8 @@ const useForm = (initialState, next, validate) => {
     if (isSubmitting) {
       const isErrors = Object.keys(errors).length !== 0;
 
-      Object.assign(window.UndefinedVariable, {});
       console.log("isErrors=>", isErrors);
-      console.log("errors=>", errors);
+
       if (isErrors) {
         setIsSubmitting(false);
       } else {
