@@ -1,6 +1,12 @@
 import React from "react";
 
-const MessageForm = ({ handleSubmit, handleKeyDown, handleChange, values }) => {
+const MessageForm = ({
+  handleSubmit,
+  handleKeyDown,
+  handleChange,
+  values,
+  errors
+}) => {
   return (
     <form onSubmit={handleSubmit} className="message-form-container">
       <div className="message-form">
@@ -19,6 +25,7 @@ const MessageForm = ({ handleSubmit, handleKeyDown, handleChange, values }) => {
           placeholder="Quoi de neuf ?"
         />
       </div>
+      {/*       {errors.message && <p className="error-text">{errors.message}</p>} */}
       <footer>
         <p>{280 - values.message.length}</p>
         <button

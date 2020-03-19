@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import FirebaseContext from "./../firebase/context";
 import {
   FiHeart,
   FiX,
@@ -10,6 +11,8 @@ import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import IconContainer from "./IconContainer";
 const Message = () => {
+  const { user } = useContext(FirebaseContext);
+
   return (
     <div className="message-container">
       <div>
@@ -28,27 +31,29 @@ const Message = () => {
           Lorem ipsumyrytyuuiogfdrsdfghioyètrutfjgkjljuyotiyfujhkjlkjiyfgjvhbjlj
           tdfghjopuoyuigyklkjmkpuoyuihjmkpiouh.
         </p>
-        <footer>
-          <IconContainer color="blue">
-            <FiMessageCircle />
-          </IconContainer>
+        {user && (
+          <footer>
+            <IconContainer color="blue">
+              <FiMessageCircle />
+            </IconContainer>
 
-          <IconContainer color="blue">
-            <FiRefreshCw />
-          </IconContainer>
+            <IconContainer color="blue">
+              <FiRefreshCw />
+            </IconContainer>
 
-          <IconContainer color="red" count="4">
-            <FiHeart />
-          </IconContainer>
+            <IconContainer color="red" count="4">
+              <FiHeart />
+            </IconContainer>
 
-          <IconContainer color="blue">
-            <FiUpload />
-          </IconContainer>
+            <IconContainer color="blue">
+              <FiUpload />
+            </IconContainer>
 
-          <IconContainer color="blue">
-            <FiX />
-          </IconContainer>
-        </footer>
+            <IconContainer color="blue">
+              <FiX />
+            </IconContainer>
+          </footer>
+        )}
       </div>
     </div>
   );
