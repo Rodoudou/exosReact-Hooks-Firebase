@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import FirebaseContext from "./../firebase/context";
 import {
   FiHeart,
@@ -11,7 +11,37 @@ import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import IconContainer from "./IconContainer";
 const Message = ({ message }) => {
-  const { user } = useContext(FirebaseContext);
+  const { user, firebase } = useContext(FirebaseContext);
+  const [isLike, setIsLike] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      const isLike = message.likes.some(like => like.likeBy.id === user.uid);
+      setIsLike(isLike);
+    }
+  }, []);
+
+  const handleLike = () => {
+    setIsLike(prevIsLike => !prevIsLike);
+
+    const likeRef = firebase.db.collection("messages").doc(message.id);
+
+    if (!isLike) {
+      const like = { likeBy: { id: user.uid, name: user.displayName } };
+      const updateLikes = [...message.likes, like];
+      likeRef.update({ likes: updateLikes });
+    } else {
+      const updateLikes = message.likes.filter(
+        like => like.likeBy.id !== user.uid
+      );
+      likeRef.update({ likes: updateLikes });
+    }
+  };
+
+  const handleDeleteMessage = () => {
+    const messageRef = firebase.db.collection("messages").doc(message.id);
+    messageRef.delete();
+  };
   const isOwner = user && user.uid === message.postedBy.id;
   return (
     <div className="message-container">
@@ -34,7 +64,12 @@ const Message = ({ message }) => {
               <FiRefreshCw />
             </IconContainer>
 
-            <IconContainer color="red" count={message.likes.length}>
+            <IconContainer
+              onClick={handleLike}
+              color="red"
+              count={message.likes.length}
+              isLike={isLike}
+            >
               <FiHeart />
             </IconContainer>
 
@@ -43,7 +78,7 @@ const Message = ({ message }) => {
             </IconContainer>
 
             {isOwner && (
-              <IconContainer color="blue">
+              <IconContainer onClick={handleDeleteMessage} color="blue">
                 <FiX />
               </IconContainer>
             )}
