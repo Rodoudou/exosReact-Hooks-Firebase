@@ -1,11 +1,11 @@
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD19wt5u4GDX2d-11W1WV2mrQIBvxX3qMA",
-  authDomain: "tweet-coders.firebaseapp.com",
-  databaseURL: "https://tweet-coders.firebaseio.com",
-  projectId: "tweet-coders",
-  storageBucket: "tweet-coders.appspot.com",
-  messagingSenderId: "434643859207",
-  appId: "1:434643859207:web:09a12af30712c85c34f7a2"
+  apiKey: "AIzaSyBDQK2cQHCSYVLNW8pRgOTRD6QnwQpq5HM",
+  authDomain: "tweeter-app-cd3b9.firebaseapp.com",
+  databaseURL: "https://tweeter-app-cd3b9.firebaseio.com",
+  projectId: "tweeter-app-cd3b9",
+  storageBucket: "tweeter-app-cd3b9.appspot.com",
+  messagingSenderId: "258335500111",
+  appId: "1:258335500111:web:88e3316feb49e6a44e473a"
 };
 export default firebaseConfig;

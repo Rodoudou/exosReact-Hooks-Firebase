@@ -5,17 +5,14 @@ const MessageForm = ({
   handleKeyDown,
   handleChange,
   values,
-  errors
+  errors,
+  user
 }) => {
   return (
     <form onSubmit={handleSubmit} className="message-form-container">
       <div className="message-form">
         <div>
-          <img
-            className="profil-picture"
-            src="https://media-exp1.licdn.com/dms/image/C4D03AQHMWF7hsdeysA/profile-displayphoto-shrink_200_200/0?e=1586995200&v=beta&t=PAwjmKbDUCIf3RZOhPzTJOBOzr0qpPDsyR32VNxhDQs"
-            alt="Profile"
-          />
+          <img className="profil-picture" src={user.photoURL} alt="Profile" />
         </div>
         <textarea
           onKeyDown={handleKeyDown}

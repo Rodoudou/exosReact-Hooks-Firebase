@@ -1,7 +1,8 @@
 import React from "react";
 import "../styles/App.css";
 import Header from "./../components/Header";
-import Message from "../components/Message";
+/* import Message from "../components/Message"; */
+import MessageListe from "./../components/MessageListe";
 import CreateMessage from "../components/CreateMessage";
 
 import firebase, { FirebaseContext } from "./../firebase";
@@ -15,9 +16,7 @@ const App = () => {
       <div className="app">
         <Header />
         <CreateMessage />
-        <Message />
-        <Message />
-        <Message />
+        <MessageListe />
       </div>
     </FirebaseContext.Provider>
   );

@@ -10,27 +10,20 @@ import {
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import IconContainer from "./IconContainer";
-const Message = () => {
+const Message = ({ message }) => {
   const { user } = useContext(FirebaseContext);
-
+  const isOwner = user && user.uid === message.postedBy.id;
   return (
     <div className="message-container">
       <div>
-        <img
-          className="profil-picture"
-          src="https://media-exp1.licdn.com/dms/image/C4D03AQHMWF7hsdeysA/profile-displayphoto-shrink_200_200/0?e=1586995200&v=beta&t=PAwjmKbDUCIf3RZOhPzTJOBOzr0qpPDsyR32VNxhDQs"
-          alt="Profile"
-        />
+        <img className="profil-picture" src={message.photo} alt="Profile" />
       </div>
       <div className="message">
         <header>
-          <h3>Amrani Redouane </h3>
-          <span>.{formatDistanceToNow(1584445587237, { locale: fr })}</span>
+          <h3>{message.postedBy.name} </h3>
+          <span>.{formatDistanceToNow(message.createAt, { locale: fr })}</span>
         </header>
-        <p>
-          Lorem ipsumyrytyuuiogfdrsdfghioyètrutfjgkjljuyotiyfujhkjlkjiyfgjvhbjlj
-          tdfghjopuoyuigyklkjmkpuoyuihjmkpiouh.
-        </p>
+        <p>{message.message}</p>
         {user && (
           <footer>
             <IconContainer color="blue">
@@ -41,7 +34,7 @@ const Message = () => {
               <FiRefreshCw />
             </IconContainer>
 
-            <IconContainer color="red" count="4">
+            <IconContainer color="red" count={message.likes.length}>
               <FiHeart />
             </IconContainer>
 
@@ -49,9 +42,11 @@ const Message = () => {
               <FiUpload />
             </IconContainer>
 
-            <IconContainer color="blue">
-              <FiX />
-            </IconContainer>
+            {isOwner && (
+              <IconContainer color="blue">
+                <FiX />
+              </IconContainer>
+            )}
           </footer>
         )}
       </div>
